@@ -2,11 +2,11 @@ import Foundation
 
 extension Data {
     public init?(hexEncoded hexData: Data) {
-        guard let string = String(data: hexData, encoding: .utf8) else {
+        guard let hexString = String(data: hexData, encoding: .utf8) else {
             return nil
         }
 
-        self.init(hexEncoded: string)
+        self.init(hexEncoded: hexString)
     }
 
     public init?(hexEncoded hexString: String) {
