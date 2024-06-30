@@ -41,7 +41,7 @@ extension Data {
     }
 
     public func hexEncodedString() -> String {
-        reduce(into: "") { hexString, byte in 
+        reduce(into: "") { hexString, byte in
             hexString += String(format: "%02x", byte)
         }
     }

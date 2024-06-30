@@ -1,6 +1,6 @@
-import Testing
 import Foundation
 import Hex
+import Testing
 
 struct HexTests {
     @Test func encode() {
@@ -28,7 +28,7 @@ struct HexTests {
     @Test func decode() {
         // Arrange
         let hexString = "303132333435363738394a4b4C4D"
-        
+
         // Act
         let data = Data(hexEncoded: hexString)!
         let string = String(decoding: data, as: UTF8.self)
@@ -40,7 +40,7 @@ struct HexTests {
     @Test func decodeEmpty() {
         // Arrange
         let hexString = ""
-        
+
         // Act
         let data = Data(hexEncoded: hexString)!
 
@@ -51,7 +51,7 @@ struct HexTests {
     @Test func decodeOneDigitString() {
         // Arrange
         let hexString = "4"
-        
+
         // Act
         let data = Data(hexEncoded: hexString)
 
@@ -62,7 +62,7 @@ struct HexTests {
     @Test func decodeTwoDigitString() {
         // Arrange
         let hexString = "4D"
-        
+
         // Act
         let data = Data(hexEncoded: hexString)!
         let string = String(decoding: data, as: UTF8.self)
@@ -74,7 +74,7 @@ struct HexTests {
     @Test func decodeNonASCIIString() {
         // Arrange
         let hexString = "4Ｄ"
-        
+
         // Act
         let data = Data(hexEncoded: hexString)
 
