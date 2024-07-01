@@ -2,39 +2,27 @@ import Foundation
 import Hex
 import Testing
 
-struct HexTests {
-    @Test func encode() {
+struct DataHexTests {
+    @Test func decodeHexString() {
         // Arrange
-        let data = "0123456789JKLM".data(using: .utf8)!
+        let hexString = "0001feff"
 
         // Act
-        let hexString = data.hexEncodedString()
+        let data = Data(hexEncoded: hexString)!
 
         // Assert
-        #expect(hexString == "303132333435363738394a4b4c4d")
+        #expect(data == Data([0x00, 0x01, 0xfe, 0xff]))
     }
 
-    @Test func encodeEmpty() {
-        // Arrange
-        let data = Data()
-
-        // Act
-        let hexString = data.hexEncodedString()
-
-        // Assert
-        #expect(hexString == "")
-    }
-
-    @Test func decode() {
+    @Test func decodeUpperCase() {
         // Arrange
         let hexString = "303132333435363738394a4b4C4D"
 
         // Act
         let data = Data(hexEncoded: hexString)!
-        let string = String(decoding: data, as: UTF8.self)
 
         // Assert
-        #expect(string == "0123456789JKLM")
+        #expect(String(decoding: data, as: UTF8.self) == "0123456789JKLM")
     }
 
     @Test func decodeEmpty() {
@@ -65,15 +53,25 @@ struct HexTests {
 
         // Act
         let data = Data(hexEncoded: hexString)!
-        let string = String(decoding: data, as: UTF8.self)
 
         // Assert
-        #expect(string == "M")
+        #expect(String(decoding: data, as: UTF8.self) == "M")
     }
 
     @Test func decodeNonASCIIString() {
         // Arrange
         let hexString = "4Ｄ"
+
+        // Act
+        let data = Data(hexEncoded: hexString)
+
+        // Assert
+        #expect(data == nil)
+    }
+
+    @Test func decodeNonHexString() {
+        // Arrange
+        let hexString = "4G"
 
         // Act
         let data = Data(hexEncoded: hexString)
