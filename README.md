@@ -1,5 +1,8 @@
 # Hex.swift
 
+[![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fyaslab%2FHex.swift%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/yaslab/Hex.swift)
+[![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fyaslab%2FHex.swift%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/yaslab/Hex.swift)
+
 A library for converting between `Data` and Hexadecimal (also known as Base-16) strings.
 
 ## Usage
