@@ -1,6 +1,6 @@
 import Foundation
 
-extension Sequence where Element == UInt8 {
+extension Sequence<UInt8> {
     /// Returns the Hexadecimal (also known as Base-16) encoded data.
     public func hexEncodedData() -> Data {
         Data(encode())
