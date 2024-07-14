@@ -2,6 +2,7 @@
   "indentation": {
     "spaces": 4
   },
+  "indentConditionalCompilationBlocks": false,
   "lineLength": 500,
   "spacesAroundRangeFormationOperators": true,
   "version": 1

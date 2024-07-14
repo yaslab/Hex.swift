@@ -1,3 +1,5 @@
+#if canImport(Testing)
+
 import Foundation
 import Hex
 import Testing
@@ -91,3 +93,5 @@ struct DataHexTests {
         #expect(data == nil)
     }
 }
+
+#endif

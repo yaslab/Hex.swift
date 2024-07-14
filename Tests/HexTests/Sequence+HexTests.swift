@@ -1,3 +1,5 @@
+#if canImport(Testing)
+
 import Foundation
 import Hex
 import Testing
@@ -47,3 +49,5 @@ struct SequenceHexTests {
         #expect(hexString == "")
     }
 }
+
+#endif
