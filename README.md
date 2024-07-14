@@ -7,7 +7,7 @@ A library for converting between `Data` and Hexadecimal (also known as Base-16) 
 
 ## Usage
 
-### Encode `Data` to Hexadecimal string
+### Encode `some Sequence<UInt8>` to Hexadecimal string
 
 ```swift
 // This is the original data.

@@ -15,14 +15,13 @@ extension Data {
     ///
     /// - Parameter hexString: The Hexadecimal encoded string.
     public init?(hexEncoded hexString: String) {
-        var hexString = hexString
-        guard let bytes = hexString.withUTF8(Data.decode(_:)) else {
+        guard let bytes = Data.decode(hexString.utf8) else {
             return nil
         }
         self = Data(bytes)
     }
 
-    private static func decode<S: Sequence>(_ input: S) -> [UInt8]? where S.Element == UInt8 {
+    private static func decode(_ input: some Sequence<UInt8>) -> [UInt8]? {
         var bytes = [UInt8]()
         var it = input.makeIterator()
         while true {
