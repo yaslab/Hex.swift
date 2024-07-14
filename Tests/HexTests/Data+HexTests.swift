@@ -3,26 +3,37 @@ import Hex
 import Testing
 
 struct DataHexTests {
+    @Test func decodeHexData() throws {
+        // Arrange
+        let hexData = try #require("000123456789abcdefff".data(using: .utf8))
+
+        // Act
+        let data = try #require(Data(hexEncoded: hexData))
+
+        // Assert
+        #expect(data == Data([0x00, 0x01, 0x23, 0x45, 0x67, 0x89, 0xab, 0xcd, 0xef, 0xff]))
+    }
+
     @Test func decodeHexString() throws {
         // Arrange
-        let hexString = "0001feff"
+        let hexString = "000123456789abcdefff"
 
         // Act
         let data = try #require(Data(hexEncoded: hexString))
 
         // Assert
-        #expect(data == Data([0x00, 0x01, 0xfe, 0xff]))
+        #expect(data == Data([0x00, 0x01, 0x23, 0x45, 0x67, 0x89, 0xab, 0xcd, 0xef, 0xff]))
     }
 
     @Test func decodeUpperCase() throws {
         // Arrange
-        let hexString = "303132333435363738394a4b4C4D"
+        let hexString = "30313233344a4b4C4D"
 
         // Act
         let data = try #require(Data(hexEncoded: hexString))
 
         // Assert
-        #expect(String(decoding: data, as: UTF8.self) == "0123456789JKLM")
+        #expect(String(decoding: data, as: UTF8.self) == "01234JKLM")
     }
 
     @Test func decodeEmpty() throws {

@@ -3,26 +3,37 @@ import Hex
 import Testing
 
 struct SequenceHexTests {
-    @Test func encodeByteArray() {
+    @Test func encodeIntoData() {
         // Arrange
-        let bytes: [UInt8] = [0x00, 0x01, 0xfe, 0xff]
+        let bytes: [UInt8] = [0x00, 0x01, 0x23, 0x45, 0x67, 0x89, 0xab, 0xcd, 0xef, 0xff]
+
+        // Act
+        let hexData = bytes.hexEncodedData()
+
+        // Assert
+        #expect(hexData == "000123456789abcdefff".data(using: .utf8))
+    }
+
+    @Test func encodeIntoString() {
+        // Arrange
+        let bytes: [UInt8] = [0x00, 0x01, 0x23, 0x45, 0x67, 0x89, 0xab, 0xcd, 0xef, 0xff]
 
         // Act
         let hexString = bytes.hexEncodedString()
 
         // Assert
-        #expect(hexString == "0001feff")
+        #expect(hexString == "000123456789abcdefff")
     }
 
     @Test func encodeStringData() throws {
         // Arrange
-        let data = try #require("0123456789JKLM".data(using: .utf8))
+        let data = try #require("01234JKLM".data(using: .utf8))
 
         // Act
         let hexString = data.hexEncodedString()
 
         // Assert
-        #expect(hexString == "303132333435363738394a4b4c4d")
+        #expect(hexString == "30313233344a4b4c4d")
     }
 
     @Test func encodeEmpty() {
