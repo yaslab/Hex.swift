@@ -3,34 +3,34 @@ import Hex
 import Testing
 
 struct DataHexTests {
-    @Test func decodeHexString() {
+    @Test func decodeHexString() throws {
         // Arrange
         let hexString = "0001feff"
 
         // Act
-        let data = Data(hexEncoded: hexString)!
+        let data = try #require(Data(hexEncoded: hexString))
 
         // Assert
         #expect(data == Data([0x00, 0x01, 0xfe, 0xff]))
     }
 
-    @Test func decodeUpperCase() {
+    @Test func decodeUpperCase() throws {
         // Arrange
         let hexString = "303132333435363738394a4b4C4D"
 
         // Act
-        let data = Data(hexEncoded: hexString)!
+        let data = try #require(Data(hexEncoded: hexString))
 
         // Assert
         #expect(String(decoding: data, as: UTF8.self) == "0123456789JKLM")
     }
 
-    @Test func decodeEmpty() {
+    @Test func decodeEmpty() throws {
         // Arrange
         let hexString = ""
 
         // Act
-        let data = Data(hexEncoded: hexString)!
+        let data = try #require(Data(hexEncoded: hexString))
 
         // Assert
         #expect(data.isEmpty)
@@ -47,12 +47,12 @@ struct DataHexTests {
         #expect(data == nil)
     }
 
-    @Test func decodeTwoDigitString() {
+    @Test func decodeTwoDigitString() throws {
         // Arrange
         let hexString = "4D"
 
         // Act
-        let data = Data(hexEncoded: hexString)!
+        let data = try #require(Data(hexEncoded: hexString))
 
         // Assert
         #expect(String(decoding: data, as: UTF8.self) == "M")

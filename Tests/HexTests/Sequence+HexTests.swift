@@ -14,9 +14,9 @@ struct SequenceHexTests {
         #expect(hexString == "0001feff")
     }
 
-    @Test func encodeStringData() {
+    @Test func encodeStringData() throws {
         // Arrange
-        let data = "0123456789JKLM".data(using: .utf8)!
+        let data = try #require("0123456789JKLM".data(using: .utf8))
 
         // Act
         let hexString = data.hexEncodedString()
