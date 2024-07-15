@@ -33,6 +33,10 @@ print(String(decoding: data, as: UTF8.self))
 // -> "0123456789JKLM"
 ```
 
+## Documentation
+
+The documentation is available on [Swift Package Index](https://swiftpackageindex.com/yaslab/Hex.swift/main/documentation/hex).
+
 ## Installation
 
 ### Swift Package Manager
