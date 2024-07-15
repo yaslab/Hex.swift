@@ -9,12 +9,11 @@ on:
       - main
 
 jobs:
-
   test-on-macos:
     runs-on: macos-latest
     strategy:
       matrix:
-        xcode-version: ['16.0', '15.4', '14.3.1']
+        xcode-version: ['16.0', '15.4', '15.2', '14.3.1']
     env:
       DEVELOPER_DIR: /Applications/Xcode_${{ matrix.xcode-version }}.app
     steps:
@@ -24,7 +23,6 @@ jobs:
       - name: Run swift test
         if: matrix.xcode-version == '16.0'
         run: swift test --enable-swift-testing
-
   test-on-linux:
     runs-on: ubuntu-latest
     steps:
