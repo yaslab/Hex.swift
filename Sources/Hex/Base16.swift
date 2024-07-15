@@ -1,9 +1,9 @@
 import Foundation
 
 /// A Base-16 codec that translates between Byte sequence and Hexadecimal (also known as Base-16) strings.
-enum Base16 {
+public enum Base16 {
     /// The result of one Base-16 decoding step.
-    enum DecodingResult: Sendable {
+    public enum DecodingResult: Sendable {
         /// An indication that no more hex characters are available in the input.
         case emptyInput
         /// An indication of a decoding error.
@@ -13,7 +13,7 @@ enum Base16 {
     }
 
     /// Decodes hex characters into 8-bit data.
-    static func decode(_ input: inout some IteratorProtocol<UInt8>) -> DecodingResult {
+    public static func decode(_ input: inout some IteratorProtocol<UInt8>) -> DecodingResult {
         func hex(from char: UInt8) -> UInt8? {
             if 0x30 <= char, char <= 0x39 {  // '0'-'9'
                 return char - 0x30
@@ -43,7 +43,7 @@ enum Base16 {
     }
 
     /// Encodes 8-bit data into hex characters.
-    static func encode(_ input: UInt8) -> (upper: UInt8, lower: UInt8) {
+    public static func encode(_ input: UInt8) -> (upper: UInt8, lower: UInt8) {
         func char(from hex: UInt8) -> UInt8 {
             if 0 <= hex, hex <= 9 {
                 return 0x30 + hex  // '0'-'9'
