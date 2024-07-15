@@ -30,7 +30,7 @@ extension Data {
                 return bytes
             case .error:
                 return nil
-            case .hexValue(let byte):
+            case .byteValue(let byte):
                 bytes.append(byte)
             }
         }

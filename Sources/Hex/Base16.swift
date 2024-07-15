@@ -8,8 +8,8 @@ public enum Base16 {
         case emptyInput
         /// An indication of a decoding error.
         case error
-        /// A decoded hex value.
-        case hexValue(UInt8)
+        /// A decoded 8-bit data.
+        case byteValue(UInt8)
     }
 
     /// Decodes hex characters into 8-bit data.
@@ -39,7 +39,7 @@ public enum Base16 {
             return .error
         }
 
-        return .hexValue((upper << 4) | lower)
+        return .byteValue((upper << 4) | lower)
     }
 
     /// Encodes 8-bit data into hex characters.
