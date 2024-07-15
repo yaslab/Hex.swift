@@ -24,4 +24,4 @@ jobs:
       - name: Run swift build
         run: swift build
       - name: Run swift test
-        run: swift test
+        run: swift test --enable-swift-testing
