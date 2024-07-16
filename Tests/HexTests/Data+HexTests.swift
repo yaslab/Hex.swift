@@ -7,7 +7,7 @@ import Testing
 struct DataHexTests {
     @Test func decodeHexData() throws {
         // Arrange
-        let hexData = try #require("000123456789abcdefff".data(using: .utf8))
+        let hexData = Data("000123456789abcdefff".utf8)
 
         // Act
         let data = try #require(Data(hexEncoded: hexData))
@@ -27,15 +27,15 @@ struct DataHexTests {
         #expect(data == Data([0x00, 0x01, 0x23, 0x45, 0x67, 0x89, 0xab, 0xcd, 0xef, 0xff]))
     }
 
-    @Test func decodeUpperCase() throws {
+    @Test func decodeUppercase() throws {
         // Arrange
-        let hexString = "30313233344a4b4C4D"
+        let hexString = "666F6F626172"
 
         // Act
         let data = try #require(Data(hexEncoded: hexString))
 
         // Assert
-        #expect(String(decoding: data, as: UTF8.self) == "01234JKLM")
+        #expect(String(decoding: data, as: UTF8.self) == "foobar")
     }
 
     @Test func decodeEmpty() throws {

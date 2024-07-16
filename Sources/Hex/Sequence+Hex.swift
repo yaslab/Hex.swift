@@ -2,18 +2,18 @@ import Foundation
 
 extension Sequence<UInt8> {
     /// Returns the Hexadecimal (also known as Base-16) encoded data.
-    public func hexEncodedData() -> Data {
-        Data(encode())
+    public func hexEncodedData(options: Base16.EncodingOptions = []) -> Data {
+        Data(encode(options: options))
     }
 
     /// Returns the Hexadecimal (also known as Base-16) encoded string.
-    public func hexEncodedString() -> String {
-        String(decoding: encode(), as: UTF8.self)
+    public func hexEncodedString(options: Base16.EncodingOptions = []) -> String {
+        String(decoding: encode(options: options), as: UTF8.self)
     }
 
-    private func encode() -> [UInt8] {
+    private func encode(options: Base16.EncodingOptions) -> [UInt8] {
         reduce(into: [UInt8]()) { string, byte in
-            let result = Base16.encode(byte)
+            let result = Base16.encode(byte, options: options)
             string.append(result.upper)
             string.append(result.lower)
         }

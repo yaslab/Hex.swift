@@ -42,11 +42,25 @@ public enum Base16 {
         return .byteValue((upper << 4) | lower)
     }
 
+    /// Options to use when encoding hex characters.
+    public struct EncodingOptions: OptionSet, Sendable {
+        public let rawValue: Int
+
+        public init(rawValue: Int) {
+            self.rawValue = rawValue
+        }
+
+        /// Make letters uppercase.
+        public static let uppercase = EncodingOptions(rawValue: 1 << 0)
+    }
+
     /// Encodes 8-bit data into hex characters.
-    public static func encode(_ input: UInt8) -> (upper: UInt8, lower: UInt8) {
+    public static func encode(_ input: UInt8, options: EncodingOptions = []) -> (upper: UInt8, lower: UInt8) {
         func char(from hex: UInt8) -> UInt8 {
             if 0 <= hex, hex <= 9 {
                 return 0x30 + hex  // '0'-'9'
+            } else if options.contains(.uppercase) {
+                return 0x41 + hex - 10  // 'A'-'F'
             } else {
                 return 0x61 + hex - 10  // 'a'-'f'
             }

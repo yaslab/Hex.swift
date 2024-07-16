@@ -13,7 +13,7 @@ struct SequenceHexTests {
         let hexData = bytes.hexEncodedData()
 
         // Assert
-        #expect(hexData == "000123456789abcdefff".data(using: .utf8))
+        #expect(hexData == Data("000123456789abcdefff".utf8))
     }
 
     @Test func encodeIntoString() {
@@ -27,15 +27,15 @@ struct SequenceHexTests {
         #expect(hexString == "000123456789abcdefff")
     }
 
-    @Test func encodeStringData() throws {
+    @Test func encodeUppercase() throws {
         // Arrange
-        let data = try #require("01234JKLM".data(using: .utf8))
+        let data = Data("foobar".utf8)
 
         // Act
-        let hexString = data.hexEncodedString()
+        let hexString = data.hexEncodedString(options: .uppercase)
 
         // Assert
-        #expect(hexString == "30313233344a4b4c4d")
+        #expect(hexString == "666F6F626172")
     }
 
     @Test func encodeEmpty() {
