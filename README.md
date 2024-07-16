@@ -11,26 +11,26 @@ A library for converting between `Data` and Hexadecimal (also known as Base-16) 
 
 ```swift
 // This is the original data.
-let data: Data = "0123456789JKLM".data(using: .utf8)!
+let data: Data = "1234JKLM".data(using: .utf8)!
 
 // Perform encoding.
 let hexString: String = data.hexEncodedString()
 
 print(hexString)
-// -> "303132333435363738394a4b4c4d"
+// -> "313233344a4b4c4d"
 ```
 
 ### Decode Hexadecimal string to `Data`
 
 ```swift
 // This is the Hexadecimal encoded string.
-let hexString: String = "303132333435363738394a4b4c4d"
+let hexString: String = "313233344a4b4c4d"
 
 // Perform decoding.
 let data: Data = Data(hexEncoded: hexString)!
 
 print(String(decoding: data, as: UTF8.self))
-// -> "0123456789JKLM"
+// -> "1234JKLM"
 ```
 
 ## Documentation

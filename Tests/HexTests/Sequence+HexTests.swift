@@ -5,7 +5,7 @@ import Hex
 import Testing
 
 struct SequenceHexTests {
-    @Test func encodeIntoData() {
+    @Test func encodeIntoHexData() {
         // Arrange
         let bytes: [UInt8] = [0x00, 0x01, 0x23, 0x45, 0x67, 0x89, 0xab, 0xcd, 0xef, 0xff]
 
@@ -16,7 +16,7 @@ struct SequenceHexTests {
         #expect(hexData == Data("000123456789abcdefff".utf8))
     }
 
-    @Test func encodeIntoString() {
+    @Test func encodeIntoHexString() {
         // Arrange
         let bytes: [UInt8] = [0x00, 0x01, 0x23, 0x45, 0x67, 0x89, 0xab, 0xcd, 0xef, 0xff]
 
@@ -27,7 +27,18 @@ struct SequenceHexTests {
         #expect(hexString == "000123456789abcdefff")
     }
 
-    @Test func encodeUppercase() throws {
+    @Test func encodeIntoUppercaseString() throws {
+        // Arrange
+        let bytes: [UInt8] = [0x00, 0x01, 0x23, 0x45, 0x67, 0x89, 0xab, 0xcd, 0xef, 0xff]
+
+        // Act
+        let hexString = bytes.hexEncodedString(options: .uppercase)
+
+        // Assert
+        #expect(hexString == "000123456789ABCDEFFF")
+    }
+
+    @Test func encodeFoobar() throws {
         // Arrange
         let data = Data("foobar".utf8)
 
