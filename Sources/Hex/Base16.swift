@@ -13,6 +13,7 @@ public enum Base16 {
     }
 
     /// Decodes hex characters into 8-bit data.
+    @inlinable
     public static func decode(_ input: inout some IteratorProtocol<UInt8>) -> DecodingResult {
         func hex(from char: UInt8) -> UInt8? {
             if 0x30 <= char, char <= 0x39 {  // '0'-'9'
@@ -55,6 +56,7 @@ public enum Base16 {
     }
 
     /// Encodes 8-bit data into hex characters.
+    @inlinable
     public static func encode(_ input: UInt8, options: EncodingOptions = []) -> (upper: UInt8, lower: UInt8) {
         func char(from hex: UInt8) -> UInt8 {
             if 0 <= hex, hex <= 9 {
