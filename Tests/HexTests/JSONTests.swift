@@ -12,7 +12,7 @@ struct JSONTests {
         let data = Data(#""313233344a4b4c4d""#.utf8)
 
         let decoder = JSONDecoder()
-        decoder.dataDecodingStrategy = .base16
+        decoder.dataDecodingStrategy = .hex
 
         // Act
         let single = try decoder.decode(Data.self, from: data)
@@ -26,7 +26,7 @@ struct JSONTests {
         let data = Data(#"{"data":"313233344a4b4c4d"}"#.utf8)
 
         let decoder = JSONDecoder()
-        decoder.dataDecodingStrategy = .base16
+        decoder.dataDecodingStrategy = .hex
 
         struct Object: Codable {
             let data: Data
@@ -44,7 +44,7 @@ struct JSONTests {
         let data = Data(#"["313233344a4b4c4d"]"#.utf8)
 
         let decoder = JSONDecoder()
-        decoder.dataDecodingStrategy = .base16
+        decoder.dataDecodingStrategy = .hex
 
         // Act
         let array = try decoder.decode([Data].self, from: data)
@@ -58,7 +58,7 @@ struct JSONTests {
         let data = Data(#""xyz""#.utf8)
 
         let decoder = JSONDecoder()
-        decoder.dataDecodingStrategy = .base16
+        decoder.dataDecodingStrategy = .hex
 
         #expect {
             // Act
@@ -82,7 +82,7 @@ struct JSONTests {
         let data = Data("1234JKLM".utf8)
 
         let encoder = JSONEncoder()
-        encoder.dataEncodingStrategy = .base16
+        encoder.dataEncodingStrategy = .hex
 
         // Act
         let string = try encoder.encode(data)
@@ -96,7 +96,7 @@ struct JSONTests {
         let data = Data("1234JKLM".utf8)
 
         let encoder = JSONEncoder()
-        encoder.dataEncodingStrategy = .base16
+        encoder.dataEncodingStrategy = .hex
 
         struct Object: Codable {
             let data: Data
@@ -114,7 +114,7 @@ struct JSONTests {
         let data = Data("1234JKLM".utf8)
 
         let encoder = JSONEncoder()
-        encoder.dataEncodingStrategy = .base16
+        encoder.dataEncodingStrategy = .hex
 
         // Act
         let string = try encoder.encode([data])
