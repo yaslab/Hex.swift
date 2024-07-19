@@ -1,6 +1,7 @@
 import Foundation
 
 extension JSONDecoder.DataDecodingStrategy {
+    /// Decode the `Data` from a Base-16 encoded string.
     public static let base16 = JSONDecoder.DataDecodingStrategy.custom { decoder in
         let container = try decoder.singleValueContainer()
         let string = try container.decode(String.self)
@@ -12,6 +13,7 @@ extension JSONDecoder.DataDecodingStrategy {
 }
 
 extension JSONEncoder.DataEncodingStrategy {
+    /// Encode the `Data` as a Base-16 encoded string.
     public static let base16 = JSONEncoder.DataEncodingStrategy.custom { data, encoder in
         var container = encoder.singleValueContainer()
         try container.encode(data.hexEncodedString())
