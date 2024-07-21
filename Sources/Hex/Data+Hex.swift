@@ -15,7 +15,8 @@ extension Data {
     ///
     /// - Parameter hexString: The Hexadecimal encoded string.
     public init?(hexEncoded hexString: String) {
-        guard let bytes = Data.decode(hexString.utf8) else {
+        var hexString = hexString
+        guard let bytes = hexString.withUTF8(Data.decode(_:)) else {
             return nil
         }
         self = Data(bytes)
