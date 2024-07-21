@@ -2,8 +2,14 @@ import Foundation
 
 /// A Base-16 codec that translates between Byte sequence and Hexadecimal (also known as Base-16) strings.
 public enum Base16 {
+    /// Validates the length of hex characters.
+    @inlinable
+    public static func isValidCount(_ count: Int) -> Bool {
+        (0 <= count) && count.isMultiple(of: 2)
+    }
+
     /// The result of one Base-16 decoding step.
-    public enum DecodingResult: Sendable {
+    public enum DecodingResult: Equatable, Sendable {
         /// An indication that no more hex characters are available in the input.
         case emptyInput
         /// An indication of a decoding error.

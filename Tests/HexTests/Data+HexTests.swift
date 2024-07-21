@@ -60,6 +60,17 @@ struct DataHexTests {
         #expect(data.isEmpty)
     }
 
+    @Test func decodeOneDigitData() {
+        // Arrange
+        let hexData = Data("4".utf8)
+
+        // Act
+        let data = Data(hexEncoded: hexData)
+
+        // Assert
+        #expect(data == nil)
+    }
+
     @Test func decodeOneDigitString() {
         // Arrange
         let hexString = "4"
@@ -93,9 +104,20 @@ struct DataHexTests {
         #expect(data == nil)
     }
 
+    @Test func decodeNonHexData() {
+        // Arrange
+        let hexData = Data("G0".utf8)
+
+        // Act
+        let data = Data(hexEncoded: hexData)
+
+        // Assert
+        #expect(data == nil)
+    }
+
     @Test func decodeNonHexString() {
         // Arrange
-        let hexString = "4G"
+        let hexString = "0G"
 
         // Act
         let data = Data(hexEncoded: hexString)
