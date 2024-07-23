@@ -2,10 +2,30 @@ import Foundation
 
 /// A Base-16 codec that translates between Byte sequence and Hexadecimal (also known as Base-16) strings.
 public enum Base16 {
+    /// Calculates the length of hex characters from the number of bytes.
+    @inlinable
+    public static func estimateEncodedCount(bytes: Int) -> Int {
+        if bytes <= 0 {
+            return 0
+        } else {
+            return bytes * 2
+        }
+    }
+
     /// Validates the length of hex characters.
     @inlinable
-    public static func isValidCount(_ count: Int) -> Bool {
+    public static func isValidEncodedCount(_ count: Int) -> Bool {
         (0 <= count) && count.isMultiple(of: 2)
+    }
+
+    /// Calculates the number of bytes from the length of hex characters.
+    @inlinable
+    public static func estimateDecodedCount(length: Int) -> Int {
+        if length <= 0 {
+            return 0
+        } else {
+            return (length - 1) / 2 + 1
+        }
     }
 
     /// The result of one Base-16 decoding step.

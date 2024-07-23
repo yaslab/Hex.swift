@@ -5,7 +5,7 @@ extension Data {
     ///
     /// - Parameter hexData: The Hexadecimal encoded data.
     public init?(hexEncoded hexData: Data) {
-        guard Base16.isValidCount(hexData.count) else {
+        guard Base16.isValidEncodedCount(hexData.count) else {
             return nil
         }
         guard let bytes = Data.decode(hexData) else {
@@ -18,7 +18,7 @@ extension Data {
     ///
     /// - Parameter hexString: The Hexadecimal encoded string.
     public init?(hexEncoded hexString: String) {
-        guard Base16.isValidCount(hexString.count) else {
+        guard Base16.isValidEncodedCount(hexString.count) else {
             return nil
         }
         var hexString = hexString
