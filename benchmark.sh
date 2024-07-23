@@ -21,6 +21,7 @@ import PackageDescription
 
 let package = Package(
   name: "benchmark",
+  platforms: [.macOS(.v11)],
   dependencies: [
     $PACKAGE
   ],
@@ -71,7 +72,27 @@ do {
   let start = Date()
 
   for _ in 0 ..< loop {
-    _ = bytes.hexEncodedData()
+    _ = (bytes as any Collection<UInt8>).hexEncodedData()
+  }
+
+  print("\`Collection.hexEncodedData()\` | " + String(format: "%.4f", Date().timeIntervalSince(start)))
+}
+
+do {
+  let start = Date()
+
+  for _ in 0 ..< loop {
+    _ = (bytes as any Collection<UInt8>).hexEncodedString()
+  }
+
+  print("\`Collection.hexEncodedString()\` | " + String(format: "%.4f", Date().timeIntervalSince(start)))
+}
+
+do {
+  let start = Date()
+
+  for _ in 0 ..< loop {
+    _ = (bytes as any Sequence<UInt8>).hexEncodedData()
   }
 
   print("\`Sequence.hexEncodedData()\` | " + String(format: "%.4f", Date().timeIntervalSince(start)))
@@ -81,7 +102,7 @@ do {
   let start = Date()
 
   for _ in 0 ..< loop {
-    _ = bytes.hexEncodedString()
+    _ = (bytes as any Sequence<UInt8>).hexEncodedString()
   }
 
   print("\`Sequence.hexEncodedString()\` | " + String(format: "%.4f", Date().timeIntervalSince(start)))
