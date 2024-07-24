@@ -37,7 +37,7 @@ struct EncoderSequence<S: Sequence<UInt8>>: Sequence {
         private var lower: UInt8?
 
         @usableFromInline
-        init(it: consuming S.Iterator, options: Base16.EncodingOptions) {
+        init(it: S.Iterator, options: Base16.EncodingOptions) {
             self.it = it
             self.options = options
         }
