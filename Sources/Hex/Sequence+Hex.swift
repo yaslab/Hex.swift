@@ -6,7 +6,7 @@ extension Sequence<UInt8> {
     /// - Parameter options: Encoding options. Default value is `[]`.
     @inlinable
     public func hexEncodedData(options: Base16.EncodingOptions = []) -> Data {
-        Data(EncoderSequence(sequence: self, options: options))
+        Data(Base16EncodingSequence(sequence: self, options: options))
     }
 
     /// Returns the Hexadecimal (also known as Base-16) encoded string.
@@ -14,12 +14,12 @@ extension Sequence<UInt8> {
     /// - Parameter options: Encoding options. Default value is `[]`.
     @inlinable
     public func hexEncodedString(options: Base16.EncodingOptions = []) -> String {
-        String(bytes: EncoderSequence(sequence: self, options: options), encoding: .utf8)!
+        String(bytes: Base16EncodingSequence(sequence: self, options: options), encoding: .utf8)!
     }
 }
 
 @usableFromInline
-struct EncoderSequence<S: Sequence<UInt8>>: Sequence {
+struct Base16EncodingSequence<S: Sequence<UInt8>>: Sequence {
     private let sequence: S
     private let options: Base16.EncodingOptions
 
