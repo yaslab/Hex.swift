@@ -37,19 +37,19 @@ cat << EOF > ./Sources/benchmark/main.swift
 import Foundation
 import Hex
 
-let length = 5120
-let loop = 25600
+let _length = 5120
+let _loop = 25600
 
-let hexData = Data((0 ..< length).map({ _ in 0x30 }))
-let hexString = String(repeating: "0", count: length)
+let _hexData = Data((0 ..< _length).map({ _ in 0x30 }))
+let _hexString = String(repeating: "0", count: _length)
 
-let bytes = Data(count: length)
+let _bytes = Data(count: _length)
 
 print("method | time (s)")
 print("--- | ---")
 
 @inline(never)
-func decodeData(_ n: Int) {
+func decodeData(_ n: Int, hexData: Data) {
   let start = Date()
 
   for _ in 0 ..< n {
@@ -60,7 +60,7 @@ func decodeData(_ n: Int) {
 }
 
 @inline(never)
-func decodeString(_ n: Int) {
+func decodeString(_ n: Int, hexString: String) {
   let start = Date()
 
   for _ in 0 ..< n {
@@ -71,55 +71,55 @@ func decodeString(_ n: Int) {
 }
 
 @inline(never)
-func encodeCollectionIntoData(_ n: Int) {
+func encodeCollectionIntoData<T: Collection<UInt8>>(_ n: Int, bytes: T) {
   let start = Date()
 
   for _ in 0 ..< n {
-    _ = (bytes as any Collection<UInt8>).hexEncodedData()
+    _ = bytes.hexEncodedData()
   }
 
   print("\`Collection.hexEncodedData()\` | " + String(format: "%.4f", Date().timeIntervalSince(start)))
 }
 
 @inline(never)
-func encodeCollectionIntoString(_ n: Int) {
+func encodeCollectionIntoString<T: Collection<UInt8>>(_ n: Int, bytes: T) {
   let start = Date()
 
   for _ in 0 ..< n {
-    _ = (bytes as any Collection<UInt8>).hexEncodedString()
+    _ = bytes.hexEncodedString()
   }
 
   print("\`Collection.hexEncodedString()\` | " + String(format: "%.4f", Date().timeIntervalSince(start)))
 }
 
 @inline(never)
-func encodeSequenceIntoData(_ n: Int) {
+func encodeSequenceIntoData<T: Sequence<UInt8>>(_ n: Int, bytes: T) {
   let start = Date()
 
   for _ in 0 ..< n {
-    _ = (bytes as any Sequence<UInt8>).hexEncodedData()
+    _ = bytes.hexEncodedData()
   }
 
   print("\`Sequence.hexEncodedData()\` | " + String(format: "%.4f", Date().timeIntervalSince(start)))
 }
 
 @inline(never)
-func encodeSequenceIntoString(_ n: Int) {
+func encodeSequenceIntoString<T: Sequence<UInt8>>(_ n: Int, bytes: T) {
   let start = Date()
 
   for _ in 0 ..< n {
-    _ = (bytes as any Sequence<UInt8>).hexEncodedString()
+    _ = bytes.hexEncodedString()
   }
 
   print("\`Sequence.hexEncodedString()\` | " + String(format: "%.4f", Date().timeIntervalSince(start)))
 }
 
-decodeData(loop)
-decodeString(loop)
-encodeCollectionIntoData(loop)
-encodeCollectionIntoString(loop)
-encodeSequenceIntoData(loop)
-encodeSequenceIntoString(loop)
+decodeData(_loop, hexData: _hexData)
+decodeString(_loop, hexString: _hexString)
+encodeCollectionIntoData(_loop, bytes: _bytes)
+encodeCollectionIntoString(_loop, bytes: _bytes)
+encodeSequenceIntoData(_loop, bytes: _bytes)
+encodeSequenceIntoString(_loop, bytes: _bytes)
 EOF
 
 swift package clean
