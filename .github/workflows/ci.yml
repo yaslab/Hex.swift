@@ -21,13 +21,12 @@ jobs:
       - name: Run swift build
         run: swift build
       - name: Run swift test
-        if: matrix.xcode-version == '16.0'
-        run: swift test --enable-swift-testing
+        run: swift test
   test-on-linux:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - name: Run swift build
         run: swift build
-#      - name: Run swift test
-#        run: swift test --enable-swift-testing
+      - name: Run swift test
+        run: swift test

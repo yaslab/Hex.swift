@@ -1,4 +1,4 @@
-#if canImport(Testing)
+#if compiler(>=6.0)
 
 import Foundation
 import Hex
