@@ -15,7 +15,7 @@ mkdir -p ./benchmark/Sources/benchmark
 cd benchmark
 
 cat << EOF > ./Package.swift
-// swift-tools-version: 5.6
+// swift-tools-version: 5.7
 
 import PackageDescription
 
