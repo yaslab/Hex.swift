@@ -41,8 +41,29 @@ The documentation is available on [Swift Package Index](https://swiftpackageinde
 
 ### Swift Package Manager
 
-```
-.package(url: "https://github.com/yaslab/Hex.swift.git", from: "1.0.0")
+Add the dependency to your `Package.swift`. For example:
+
+```swift
+// swift-tools-version: 5.7
+
+import PackageDescription
+
+let package = Package(
+    name: "MyPackage",
+    dependencies: [
+        // Add `Hex.swift` package here.
+        .package(url: "https://github.com/yaslab/Hex.swift.git", from: "1.0.0")
+    ],
+    targets: [
+        .executableTarget(
+            name: "MyCommand",
+            dependencies: [
+                // Then add it to your module's dependencies.
+                .product(name: "Hex", package: "Hex.swift")
+            ]
+        )
+    ]
+)
 ```
 
 ## License
