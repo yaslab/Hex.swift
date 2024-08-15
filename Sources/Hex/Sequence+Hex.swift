@@ -14,7 +14,13 @@ extension Sequence<UInt8> {
     /// - Parameter options: Encoding options. Default value is `[]`.
     @inlinable
     public func hexEncodedString(options: Base16.EncodingOptions = []) -> String {
-        String(bytes: Base16EncodingSequence(sequence: self, options: options), encoding: .utf8)!
+        #if compiler(>=6.0)
+        if #available(iOS 18.0, macOS 15.0, tvOS 18.0, visionOS 2.0, watchOS 11.0, *) {
+            return String(validating: Base16EncodingSequence(sequence: self, options: options), as: UTF8.self)!
+        }
+        #endif
+
+        return String(bytes: Base16EncodingSequence(sequence: self, options: options), encoding: .utf8)!
     }
 }
 
