@@ -10,7 +10,8 @@ extension Collection<UInt8> {
         var data = Data(count: capacity)
         data.withUnsafeMutableBytes { raw in
             raw.withMemoryRebound(to: UInt8.self) { buffer in
-                encode(into: buffer, options: options)
+                buffer.deinitialize()
+                encode(into: buffer.baseAddress.unsafelyUnwrapped, options: options)
             }
         }
         return data
@@ -24,17 +25,17 @@ extension Collection<UInt8> {
     public func hexEncodedString(options: Base16.EncodingOptions = []) -> String {
         let capacity = Base16.estimateEncodedCount(bytes: count)
         return String(unsafeUninitializedCapacity: capacity) { buffer in
-            encode(into: buffer, options: options)
+            encode(into: buffer.baseAddress.unsafelyUnwrapped, options: options)
             return capacity
         }
     }
 
     @inlinable
-    func encode(into buffer: UnsafeMutableBufferPointer<UInt8>, options: Base16.EncodingOptions) {
+    func encode(into output: UnsafeMutablePointer<UInt8>, options: Base16.EncodingOptions) {
         for (i, byte) in enumerated() {
             let pair = Base16.encode(byte, options: options)
-            buffer[i * 2 + 0] = pair.upper
-            buffer[i * 2 + 1] = pair.lower
+            output.advanced(by: i * 2 + 0).initialize(to: pair.upper)
+            output.advanced(by: i * 2 + 1).initialize(to: pair.lower)
         }
     }
 }
