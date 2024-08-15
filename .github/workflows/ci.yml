@@ -12,6 +12,7 @@ jobs:
       matrix:
         xcode-version: ['16.0', '15.4', '15.2', '14.3.1']
     runs-on: macos-latest
+    timeout-minutes: 3
     env:
       DEVELOPER_DIR: /Applications/Xcode_${{ matrix.xcode-version }}.app
     steps:
@@ -25,6 +26,7 @@ jobs:
       matrix:
         swift-version: ['6.0-snapshot', '5.10.1', '5.9.2', '5.8.1', '5.7.3']
     runs-on: ubuntu-latest
+    timeout-minutes: 3
     steps:
       - uses: actions/checkout@v4
       - name: Install Swift ${{ matrix.swift-version }}
