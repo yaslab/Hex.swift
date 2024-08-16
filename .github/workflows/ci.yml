@@ -38,4 +38,5 @@ jobs:
       - name: Run swift build
         run: swift build
       - name: Run swift test
-        run: swift test
+        if: matrix.swift-version == '6.0-snapshot'
+        run: swift test --enable-swift-testing
