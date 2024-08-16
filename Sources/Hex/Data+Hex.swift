@@ -34,8 +34,6 @@ extension Data {
         var bytes = Data(count: capacity)
         let count = bytes.withUnsafeMutableBytes { raw in
             raw.withMemoryRebound(to: UInt8.self) { buffer in
-                buffer.deinitialize()
-
                 var i = 0
                 var it = input.makeIterator()
                 let output = buffer.baseAddress.unsafelyUnwrapped
@@ -46,7 +44,7 @@ extension Data {
                     case .error:
                         return -1
                     case .byteValue(let byte):
-                        output.advanced(by: i).initialize(to: byte)
+                        output.advanced(by: i).pointee = byte
                         i += 1
                     }
                 }
