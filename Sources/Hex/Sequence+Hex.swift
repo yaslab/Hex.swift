@@ -6,7 +6,8 @@ extension Sequence<UInt8> {
     /// - Parameter options: Encoding options. Default value is `[]`.
     @inlinable
     public func hexEncodedData(options: Base16.EncodingOptions = []) -> Data {
-        Data(Base16EncodingSequence(sequence: self, options: options))
+        let seq = Base16EncodingSequence(sequence: self, options: options)
+        return Data(seq)
     }
 
     /// Returns the Hexadecimal (also known as Base-16) encoded string.
@@ -14,13 +15,15 @@ extension Sequence<UInt8> {
     /// - Parameter options: Encoding options. Default value is `[]`.
     @inlinable
     public func hexEncodedString(options: Base16.EncodingOptions = []) -> String {
+        let seq = Base16EncodingSequence(sequence: self, options: options)
+
         #if compiler(>=6.0)
         if #available(iOS 18.0, macOS 15.0, tvOS 18.0, visionOS 2.0, watchOS 11.0, *) {
-            return String(validating: Base16EncodingSequence(sequence: self, options: options), as: UTF8.self)!
+            return String(validating: seq, as: UTF8.self).unsafelyUnwrapped
         }
         #endif
 
-        return String(bytes: Base16EncodingSequence(sequence: self, options: options), encoding: .utf8)!
+        return String(bytes: seq, encoding: .utf8).unsafelyUnwrapped
     }
 }
 
