@@ -44,7 +44,7 @@ The documentation is available on [Swift Package Index](https://swiftpackageinde
 Add the dependency to your `Package.swift`. For example:
 
 ```swift
-// swift-tools-version: 5.7
+// swift-tools-version: 5.8
 
 import PackageDescription
 
