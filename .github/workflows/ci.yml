@@ -30,11 +30,13 @@ jobs:
     timeout-minutes: 3
     steps:
       - uses: actions/checkout@v4
+      - name: Install Dependencies
+        run: apt-get -y install libcurl4-openssl-dev
       - name: Install Swiftly
         run: >
           curl -O https://download.swift.org/swiftly/linux/swiftly-$(uname -m).tar.gz &&
           tar zxf swiftly-$(uname -m).tar.gz &&
-          ./swiftly init --quiet-shell-followup &&
+          ./swiftly init --skip-install --quiet-shell-followup &&
           . ~/.local/share/swiftly/env.sh &&
           hash -r
       - name: Install Swift ${{ matrix.swift-version }}
