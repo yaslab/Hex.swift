@@ -31,7 +31,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Install Dependencies
-        run: apt-get -y install libcurl4-openssl-dev
+        run: |
+          sudo apt-get update
+          sudo apt-get -y install libcurl4-openssl-dev
       - name: Install Swiftly
         run: >
           curl -O https://download.swift.org/swiftly/linux/swiftly-$(uname -m).tar.gz &&
