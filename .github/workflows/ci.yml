@@ -38,7 +38,7 @@ jobs:
           tar zxf swiftly-$(uname -m).tar.gz &&
           ./swiftly init --assume-yes --skip-install &&
           . ~/.local/share/swiftly/env.sh &&
-          hash -r &&
+          swiftly list-available &&
           swiftly install --use ${{ matrix.swift-version }} &&
           swift --version
       - name: Run swift test
