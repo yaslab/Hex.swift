@@ -17,11 +17,9 @@ extension Sequence<UInt8> {
     public func hexEncodedString(options: Base16.EncodingOptions = []) -> String {
         let seq = Base16EncodingSequence(sequence: self, options: options)
 
-        #if compiler(>=6.0)
         if #available(iOS 18.0, macOS 15.0, tvOS 18.0, visionOS 2.0, watchOS 11.0, *) {
             return String(validating: seq, as: UTF8.self).unsafelyUnwrapped
         }
-        #endif
 
         return String(bytes: seq, encoding: .utf8).unsafelyUnwrapped
     }

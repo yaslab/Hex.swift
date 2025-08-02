@@ -1,5 +1,3 @@
-#if compiler(>=6.0)
-
 import Foundation
 import Hex
 import Testing
@@ -123,5 +121,3 @@ struct JSONTests {
         #expect(String(decoding: string, as: UTF8.self) == #"["313233344a4b4c4d"]"#)
     }
 }
-
-#endif

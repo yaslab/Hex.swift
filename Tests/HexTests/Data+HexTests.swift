@@ -1,5 +1,3 @@
-#if compiler(>=6.0)
-
 import Foundation
 import Hex
 import Testing
@@ -126,5 +124,3 @@ struct DataHexTests {
         #expect(data == nil)
     }
 }
-
-#endif

@@ -21,7 +21,6 @@ extension Collection<UInt8> {
     ///
     /// - Parameter options: Encoding options. Default value is `[]`.
     @inlinable
-    @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
     public func hexEncodedString(options: Base16.EncodingOptions = []) -> String {
         let capacity = Base16.estimateEncodedCount(bytes: count)
         return String(unsafeUninitializedCapacity: capacity) { buffer in
