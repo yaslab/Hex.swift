@@ -1,5 +1,3 @@
-#if compiler(>=6.0)
-
 import Foundation
 import Hex
 import Testing
@@ -64,5 +62,3 @@ struct Base16Tests {
         #expect(result == .error)
     }
 }
-
-#endif

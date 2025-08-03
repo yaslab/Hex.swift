@@ -15,13 +15,13 @@ mkdir -p ./benchmark/Sources/benchmark
 cd benchmark
 
 cat << EOF > ./Package.swift
-// swift-tools-version: 5.8
+// swift-tools-version: 6.0
 
 import PackageDescription
 
 let package = Package(
   name: "benchmark",
-  platforms: [.macOS(.v11)],
+  platforms: [.macOS(.v15)],
   dependencies: [
     $PACKAGE
   ],
