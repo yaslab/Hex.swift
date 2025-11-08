@@ -10,12 +10,12 @@ struct Base16Tests {
         (1, 2),
         (2, 4),
     ])
-    func estimateEncodedCount(argument: (bytes: Int, expected: Int)) {
+    func estimateEncodedCount(bytes: Int, expected: Int) {
         // Act
-        let length = Base16.estimateEncodedCount(bytes: argument.bytes)
+        let length = Base16.estimateEncodedCount(bytes: bytes)
 
         // Assert
-        #expect(length == argument.expected)
+        #expect(length == expected)
     }
 
     // Arrange
@@ -26,12 +26,12 @@ struct Base16Tests {
         (1, false),
         (2, true),
     ])
-    func isValidEncodedCount(argument: (length: Int, expected: Bool)) {
+    func isValidEncodedCount(length: Int, expected: Bool) {
         // Act
-        let isValid = Base16.isValidEncodedCount(argument.length)
+        let isValid = Base16.isValidEncodedCount(length)
 
         // Assert
-        #expect(isValid == argument.expected)
+        #expect(isValid == expected)
     }
 
     // Arrange
@@ -43,12 +43,12 @@ struct Base16Tests {
         (3, 2),
         (4, 2),
     ])
-    func estimateDecodedCount(argument: (length: Int, expected: Int)) {
+    func estimateDecodedCount(length: Int, expected: Int) {
         // Act
-        let bytes = Base16.estimateDecodedCount(length: argument.length)
+        let bytes = Base16.estimateDecodedCount(length: length)
 
         // Assert
-        #expect(bytes == argument.expected)
+        #expect(bytes == expected)
     }
 
     @Test func decodeOneDigitString() {
