@@ -71,8 +71,10 @@ public enum Base16 {
 
     /// Options to use when encoding hex characters.
     public struct EncodingOptions: OptionSet, Sendable {
+        /// The raw value of the encoding options.
         public let rawValue: Int
 
+        /// Creates a new instance with the specified raw value.
         public init(rawValue: Int) {
             self.rawValue = rawValue
         }
